@@ -1,0 +1,51 @@
+REQUISITES:
+-----------
+1. A ceph source folder (I guess, version does not matter) that has been completely built.
+2. A linux machine is needed to build this tool.
+
+HOW TO USE:
+-----------
+1. Run 'make CEPH_SRCDIR=</path/to/ceph/src>' to build the tool
+2. Run 'make clean' to clean
+3. After building, an elf file named 'tool' will be created
+4. Run 'tool --help' to see the usage information of the tool
+
+Sample Output:
+--------------
+cdps$ ./tool --pool-info "pool 2 'rbd' rep size 2 min_size 1 crush_ruleset 0 object_hash rjenkins pg_num 128 pgp_num 128 last_change 1 owner 0" --image-info "rbd image 'babu':
+size 10240 KB in 3 objects
+order 22 (4096 KB objects)
+block_name_prefix: rb.0.1008.74b0dc51
+format: 1" --crushmap ../ceph/map.txt
+
+Object summary
+--------------
+'babu' will be placed in  => [16,101]
+'rb.0.1008.74b0dc51.000000000000' will be placed in  => [104,27]
+'rb.0.1008.74b0dc51.000000000001' will be placed in  => [8,76]
+'rb.0.1008.74b0dc51.000000000002' will be placed in  => [43,37]
+
+Device summary
+--------------
+  8 => 
+    => rb.0.1008.74b0dc51.000000000001
+ 16 => 
+    => babu
+ 27 => 
+    => rb.0.1008.74b0dc51.000000000000
+ 37 => 
+    => rb.0.1008.74b0dc51.000000000002
+ 43 => 
+    => rb.0.1008.74b0dc51.000000000002
+ 76 => 
+    => rb.0.1008.74b0dc51.000000000001
+101 => 
+    => babu
+104 => 
+    => rb.0.1008.74b0dc51.000000000000
+
+Total summary
+-------------
+Total 8 devices 
+  for 2 replications 
+   of 4 objects
